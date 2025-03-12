@@ -18,6 +18,7 @@
     <button onclick="openModal('modalMateria')">Cadastrar Matéria</button>
     <button onclick="openModal('modalAula')">Cadastrar Aula</button>
     <button onclick="exportarParaExcel()">Exportar para Excel</button>
+    <button onclick="sair()">Sair</button>
 
     <!-- Modal de Cadastro de Matérias -->
     <div id="modalMateria" class="modal">
@@ -157,6 +158,18 @@
         function exportarParaExcel() {
             window.location.href = 'http://localhost:5505/exportar-excel';
         }
+
+        function sair() {
+        if (confirm("Você tem certeza que deseja sair?")) {
+            fetch('http://localhost:5505/', { method: 'POST' })
+                .then(() => {
+                    window.location.href = 'home.html';
+                })
+                .catch(error => {
+                    console.error('Erro ao sair:', error);
+                    alert('Erro ao fazer logout.');
+                });
+        }}
 
         function openModal(id) { document.getElementById(id).style.display = 'block'; }
         function closeModal(id) { document.getElementById(id).style.display = 'none'; }
